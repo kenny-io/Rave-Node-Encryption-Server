@@ -13,11 +13,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/encrypt", function(req, res) {
   var payload = req.body;
-  const PBFPubKey = "FLW-PUBfKey-12345667889";
-  // Ideally you will fetch the public key from req.body
+  const public_key = req.body.public_key;
   var client = encrypt("28bbd87cef95423a40761d4a", JSON.stringify(payload));
   res.json({
-    PBFPubKey: PBFPubKey,
+    public_key: public_key,
     client: client,
     alg: "3DES-24"
   });
