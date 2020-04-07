@@ -14,11 +14,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.post("/encrypt", function(req, res) {
   var payload = req.body;
   const public_key = req.body.public_key;
-  var client = encrypt("28bbd87cef95423a40761d4a", JSON.stringify(payload));
+  const enckey = req.body.enckey;
+  var client = encrypt(enckey, JSON.stringify(payload));
   res.json({
     public_key: public_key,
-    client: client,
-    alg: "3DES-24"
+    client: client
   });
 });
 
