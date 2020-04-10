@@ -11,14 +11,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.post("/encrypt", function(req, res) {
+app.post("/encrypt", function (req, res) {
   var payload = req.body;
   const public_key = req.body.public_key;
   const enckey = req.body.enckey;
   var client = encrypt(enckey, JSON.stringify(payload));
   res.json({
     public_key: public_key,
-    client: client
+    client: client,
   });
 });
 
@@ -36,7 +36,7 @@ function encrypt(key, text) {
 }
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
 });
 
 //start server
-app.listen(3311, function() {
+app.listen(3311, function () {
   console.log("Node server running on port 3311");
 });
 
